@@ -49,3 +49,31 @@ class Location(models.Model):
    
     def update_location(self, **kwargs):
         self.objects.filter(id = self.pk).update(**kwargs)     
+
+    @classmethod
+    def all_pictures(cls):
+        pictures = cls.objects.all()
+        return pictures 
+
+    @classmethod
+    def picture_locations(cls):
+        pictures = cls.objects.order_by('location')
+        return pictures 
+
+    @classmethod
+    def picture_categories(cls):
+        pictures = cls.objects.order_by('category')
+        return pictures 
+
+    @classmethod
+    def get_picture(cls, id):
+        picture = cls.objects.get(id=id)
+        return picture
+
+    @classmethod
+    def search_by_category(cls, search_input):
+        images = cls.objects.filter(category__name__icontains=search_input)
+        return images        
+
+    class Meta:
+        ordering = ['name']
