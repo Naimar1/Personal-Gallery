@@ -33,4 +33,4 @@ class Category(models.Model):
         Category.objects.filter(id = self.pk).delete()
     
     def update_category(self, **kwargs):
-        self.objects.filter(id = self.pk).update(**kwargs)              
+        # self.objects.filter(id = self.pk).update(**kwargs)              
