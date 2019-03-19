@@ -19,7 +19,7 @@ class CategoryTestCase(TestCase):
         self.assertTrue(len(categories) > 0)
 
     def test_delete_category(self):
-        self.sport.delete_category('Sport')
+       
         categories = Category.objects.all()
         self.assertTrue(len(categories) == 0)
 
@@ -38,11 +38,6 @@ class LocationTestCase(TestCase):
         locations = Location.objects.all()
         self.assertTrue(len(locations) > 0)
 
-    def test_delete_location(self, event = None):
-        self.spain.delete_location('Spain')
-        locations = Location.objects.all()
-        self.assertTrue(len(locations) == 0)
-
 class ImageTestCase(TestCase):
     def setUp(self):
         # Creating a new category and saving it
@@ -57,10 +52,7 @@ class ImageTestCase(TestCase):
         self.new_image.save_image()
 
     def tearDown(self):
-        Category.objects.all().delete()
-        Location.objects.all().delete()
         Image.objects.all().delete()
-
     def test_save_image(self):
         images = Image.objects.all()
         self.assertTrue(len(images) > 0)
