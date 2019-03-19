@@ -2,9 +2,9 @@ from django.db import models
 
 # Create your models here.
 class Image(models.Model):
-    image = models.ImageField(upload_to = 'pics/', null = True)
+    image = models.ImageField(upload_to = 'pictures/', null = True)
     name = models.CharField(max_length=30)
-    description = models.CharField(max_length=50)
+    description = models.CharField(max_length=200)
     category = models.ForeignKey('Category', on_delete=models.PROTECT, null='True', blank=True)
     location = models.ForeignKey('Location', on_delete=models.PROTECT, null='True', blank=True)
 
@@ -15,10 +15,12 @@ class Image(models.Model):
         self.save()   
 
     def delete_image(self):
-        Image.objects.filter(id = self.pk).delete() 
-    
-    def update_image(self, **kwargs):
-        self.objects.filter(id = self.pk).update(**kwargs) 
+        Image.objects.filter(id = self.pk).delete()
+     
+    @classmethod
+    def search_by_category(cls, search_input):
+        images = cls.objects.filter(category__name__icontains=search_input)
+        return images 
 
 class Category(models.Model):
     name = models.CharField(max_length=15) 
@@ -27,10 +29,11 @@ class Category(models.Model):
         return self.name
 
     def save_category(self):
-        self.save()    
+        self.save()
 
+    @classmethod
     def delete_category(self):
-        Category.objects.filter(id = self.pk).delete()
+        Category.objects.filter(id = self.pkcategory).delete()
     
     def update_category(self, **kwargs):
         self.objects.filter(id = self.pk).update(**kwargs)    
@@ -42,8 +45,9 @@ class Location(models.Model):
         return self.name
 
     def save_location(self):
-        self.save()    
-
+        self.save()
+        
+    @classmethod    
     def delete_location(self):
         Location.objects.filter(id = self.pk).delete()
    
@@ -51,29 +55,25 @@ class Location(models.Model):
         self.objects.filter(id = self.pk).update(**kwargs)     
 
     @classmethod
-    def all_pictures(cls):
-        pictures = cls.objects.all()
-        return pictures 
+    def images(cls):
+        images = cls.objects.all()
+        return images 
 
     @classmethod
-    def picture_locations(cls):
-        pictures = cls.objects.order_by('location')
-        return pictures 
+    def image_locations(cls):
+        images = cls.objects.order_by('location')
+        return images 
 
     @classmethod
-    def picture_categories(cls):
-        pictures = cls.objects.order_by('category')
-        return pictures 
+    def image_categories(cls):
+        images = cls.objects.order_by('category')
+        return images 
 
     @classmethod
-    def get_picture(cls, id):
-        picture = cls.objects.get(id=id)
-        return picture
+    def get_image(cls, id):
+        image = cls.objects.get(id=id)
+        return image
 
-    @classmethod
-    def search_by_category(cls, search_input):
-        images = cls.objects.filter(category__name__icontains=search_input)
-        return images        
 
     class Meta:
         ordering = ['name']

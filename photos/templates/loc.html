@@ -2,7 +2,7 @@
 {% block content %}
 {{block.super}}
 <div class="container">
-  <h1 class="text-center">Images of {{location.name}}</h1>
+  <h1 class="text-center" style="color:darkcyan; font-family:monospace">This is from  {{location.name}}</h1>
   <div class="row">
     {% for image in images %}
     <div class="col-md-4">
@@ -19,7 +19,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <img src="{{image.image.url}}" style="width:570px; height:500px;" alt="Image">
+              <img src="http://127.0.0.1:8000{{image.image.url}}" style="width:570px; height:500px;" alt="Image">
               <br>
               {{image.image_description}}
             </div>
