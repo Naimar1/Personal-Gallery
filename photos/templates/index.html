@@ -17,3 +17,17 @@
                               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                               <h5 class="modal-title" id="imageTitle">{{image.name}}</h5>
                               </button>
+                            </div>
+                            <div class="modal-body">
+                              <img src="{{image.image.url}}" class="img-responsive" alt="Image">
+                             
+                              <br>
+                              {{image.description}}
+                            </div>
+                            <div class="modal-footer">
+                              <input class="form-control input-lg" type="text"  value="{{image.image.url}}" id="{{image.id}}-url" >
+                              <button class="btn btn-outline-info" onclick="copyUrl('{{image.id}}-url')">Copy link</button>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
