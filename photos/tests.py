@@ -23,3 +23,24 @@ class CategoryTestCase(TestCase):
         categories = Category.objects.all()
         self.assertTrue(len(categories) == 0)
 
+class LocationTestCase(TestCase):
+    def setUp(self):
+        self.spain = Location(name = 'Spain')
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.spain, Location))
+
+    def tearDown(self):
+        Location.objects.all().delete()
+
+    def test_save_location(self):
+        self.spain.save_location()
+        locations = Location.objects.all()
+        self.assertTrue(len(locations) > 0)
+
+    def test_delete_location(self, event = None):
+        self.spain.delete_location('Spain')
+        locations = Location.objects.all()
+        self.assertTrue(len(locations) == 0)
+
+
