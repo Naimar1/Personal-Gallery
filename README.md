@@ -20,3 +20,10 @@ Independent project for this week, it is to develop a personal gallery applicati
 * run : python manage.py runserver
 * link to visit: https://personalgarelly.herokuapp.com/
 
+## Known Bugs
+Hope that my codes is clear and understandable,
+There are no errors, by mistake if you find them please contact me for the below address.
+
+## Technologies Used
+ * Python
+
